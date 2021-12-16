@@ -1,0 +1,30 @@
+require 'sinatra/base'
+require 'sinatra'
+require "sinatra/cookies"
+
+get '/' do
+    if request.cookies['auth']
+        @user = getUsername()          # getUsername() - Method to get username from cookies 
+        if @user.upcase == "MICHAEL"
+            return erb :michael
+        end
+        return erb:index
+    else
+        return erb :index
+    end
+end
+
+post '/login' do
+    user = params['username'].to_s[0..20]
+    password = params['password'].to_s[0..20]
+    if user =~ /[A-Z]/ or user == 'michael'
+        info = "Invalid Username/Password"
+        return erb :login, :locals => {:info => info}
+    elsif password == "whatever" and user.upcase == "MICHAEL"
+        set_Cookies(user)
+    else
+        info = "Invalid Username/Password"
+        return erb :login, :locals => {:info => info}
+    end
+    redirect '/'
+end

@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'jwt'
+gem 'sinatra-contrib'
+gem 'base64'
+gem 'thin'
+gem 'puma'
+gem 'reel'
+gem 'http'
+gem 'webrick'

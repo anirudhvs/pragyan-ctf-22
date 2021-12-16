@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+    container_name: codeOfChoas
+    restart: always
+    ports:
+      - "4567:4567"
+    environment:
+      - RAILS_ENV=${DEPLOY_PRODUCTION}
+      - RACK_ENV=${DEPLOY_PRODUCTION}
