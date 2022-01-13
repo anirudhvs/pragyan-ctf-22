@@ -89,6 +89,10 @@ get '/robots.txt' do
     erb :robots
 end
 
+get '/status' do
+    return "OK"
+end
+
 not_found do
     status = 404
     erb :oops
