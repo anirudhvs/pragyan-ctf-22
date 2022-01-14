@@ -1,0 +1,2 @@
+flag = 'p_ctf{0ne_T1m3_Pads_are_1ns3cur5}'
+k =  0x8251d61711
