@@ -1,0 +1,20 @@
+{% include "header.html" %}
+<h1>Report User</h1>
+<form class="" action="/report" method="POST">
+    <h4>Dont worry Admin will look into the issues</h4>
+    <div class="form-group">
+        <label>User ID</label>
+        <input class="form-control" type="text" name="uuid" placeholder="UUID" required/>
+        <label>Complaint</label>
+        <textarea class="form-control" name="complaint" rows="5" cols="30"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Report
+    </button>
+    <div style="padding-top: 20px;">
+        <p style="color: crimson;">{{data}}</p>
+    </div>
+    
+
+</form>
+{% include "footer.html" %}

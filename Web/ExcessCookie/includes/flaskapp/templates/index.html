@@ -1,0 +1,42 @@
+{% include "header.html" %}
+
+{% block content %}
+
+<h1 class="text-primary">Hello {{data['username']}}</h1>
+
+<h2>Most Viewed Posts:</h2>
+<div style="padding-left: 40px;">
+  <h3 style="font-weight: inherit;">
+    Anonymous:
+  </h3>
+  <p>(UserID: 61c8b1f9beceeaa92ab06c00)</p>
+  <h4>
+    The image with which you see a person from outside won't be the same as from inside.
+  </h4>
+</div>
+
+<h2>Your Post:</h2>
+{% if data['posts']|length < 1 %} <p>No posts yet..!!!</p>
+
+  {% else %}
+  <p>(UserID: {{data['_id']}})</p>
+  <div style="padding-left: 40px;">
+    {% for post in data['posts'] %}
+
+    <h3 style="font-weight: inherit;">
+      {{post[0]}}:
+    </h3>
+    <h4 style="padding-left: 10px;">
+      {{post[1]}}
+    </h4>
+    {% endfor %}
+
+  </div>
+
+
+  {% endif %}
+
+  {% endblock content %}
+
+
+  {% include "footer.html" %}

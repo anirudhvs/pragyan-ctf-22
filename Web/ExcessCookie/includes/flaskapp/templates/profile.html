@@ -1,0 +1,82 @@
+{% include "header.html" %}
+
+<p style="color: crimson;">{{info}}</p>
+<div class="container bootstrap snippets bootdey">
+    <div>
+        <h4>Full Name:{{data['fullname']}}</h4> 
+        <h4>Username: {{data['username']}}</h4>
+        <h4>About: {{data['about']}}</h4>
+        <h4>Email: {{data['email']}}</h4>
+    </div>
+    <h1 class="text-primary">Edit Profile</h1>
+    <hr />
+
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                
+                {% if 'svg' in data['profilePic'] %}
+                    <iframe frameborder="0" scrolling="no" src="{{ url_for('uploads', filename = data['profilePic']) }}" class="avatar profilePic" width="100px" height="100px"></iframe>
+                {% else %}
+                    <img src="{{ url_for('uploads', filename = data['profilePic']) }}" alt="Profile" class="avatar profilePic"/>
+                {% endif %}    
+                    
+                <h6>Upload a different photo...</h6>
+                <form action="/uploadProfile" method="POST" enctype="multipart/form-data">
+                    <input type="file" class="form-control" name="profilePic" />
+                    <button class="btn btn-primaryS" type="submit">
+                        Upload
+                    </button>
+                </form>
+                <p>File size should not exceed 1MB.</p>
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+            <h3>Personal info</h3>
+
+            <form class="form-horizontal" role="form" method="POST" action="/profile">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">UUID:</label>
+                    <div class="col-lg-8">
+                        <h5>{{data['_id']}}</h5>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Full name:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" name="fullname" placeholder="Fullname" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="email" name="email" placeholder="Email" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Gender:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" name="gender" placeholder="Gender" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">About:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" name="about" placeholder="About" required/>
+                    </div>
+                </div>
+                <div style="padding-left: 145px;">
+                    <button class="btn btn-primaryS" type="submit">
+                        Submit Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<hr />
+
+{% include "footer.html" %}
