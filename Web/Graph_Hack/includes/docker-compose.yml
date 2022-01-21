@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  graph_api:
+    container_name: graph_api
+    build: ./api
+    restart: always
+    ports:
+      - "4000:4000"
+    depends_on:
+      - graph_mongo
+    env_file:
+      - .env
+  
+  graph_mongo:
+    container_name: graph_mongo
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./mongodata:/data/db
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+  
+  graph_client:
+    container_name: graph_client
+    build: ./client
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - graph_api
+    env_file:
+      - .env

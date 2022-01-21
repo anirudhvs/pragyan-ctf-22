@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "apollo-codegen-core": "^0.40.7",
+    "apollo-language-server": "^1.26.7",
+    "apollo-server": "^3.6.1",
+    "apollo-server-express": "^3.6.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "graphql": "^16.2.0",
+    "mongoose": "^6.1.5",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
