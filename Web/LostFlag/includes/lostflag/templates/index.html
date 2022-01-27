@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Flag</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet"type="text/css" href="{% static 'css/index.css' %}" >
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <h1>Welcome !</h1>
+            <h2>Try entering any Country Name to see their Flag.</h2>
+            <div class="search-box">
+                <div class="search-icon"><i class="fa fa-search search-icon"></i></div>
+                <form action=" " class="search-form" method="POST">{% csrf_token %}
+                    <input type="text" placeholder="Search" id="search" autocomplete="off" name="countryname" required/>
+                </form>
+                <svg class="search-border" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" viewBox="0 0 671 111"
+                    style="enable-background:new 0 0 671 111;" xml:space="preserve">
+                    <path class="border" d="M335.5,108.5h-280c-29.3,0-53-23.7-53-53v0c0-29.3,23.7-53,53-53h280" />
+                    <path class="border" d="M335.5,108.5h280c29.3,0,53-23.7,53-53v0c0-29.3-23.7-53-53-53h-280" />
+                </svg>
+                <div class="go-icon"><i class="fa fa-arrow-right"></i></div>
+            </div>
+
+            <div style="padding-top: 250px;">
+                <h2>If you think of helping my friend Casshe, please <a style="color: brown;" href="report">REPORT</a> the endpoint where you think the challenge flag would be.</h2>
+            </div>
+        </div>
+    </main> 
+</body>
+
+</html>

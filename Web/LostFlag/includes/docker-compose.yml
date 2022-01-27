@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  lostflag:
+    container_name: lostflag
+    build: ./lostflag
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./lostflag:/lostflag
+    ports:
+      - "8000:8000"
+
+  redis:
+    container_name: redis_lostflag
+    image: redis:6.2.6
+    restart: always
+    command: sh -c 'redis-server --requirepass "$${REDIS_PASSWORD}"'
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=verysecurepassword

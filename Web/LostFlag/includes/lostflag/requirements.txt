@@ -1,0 +1,8 @@
+django
+python-decouple
+waitress
+gunicorn[gevent]
+whitenoise
+requests
+requests-async
+redis
