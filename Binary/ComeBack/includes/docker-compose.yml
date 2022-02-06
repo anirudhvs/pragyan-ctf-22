@@ -1,0 +1,7 @@
+version: '3'
+services:
+  comeback: 
+    build: .
+    ports:
+      - "5663:1337" # local:container
+    privileged: true
