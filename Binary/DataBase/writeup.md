@@ -25,3 +25,5 @@ We can use heap metadata to get addresses on the heap. By allocating three `stri
 Once we get the address on the heap, we can get the address of the `secret` function and `GOT` entry of fflush/exit/read/atoi using `gdb`, and trick malloc to return the address of one of these and override them with the address of `secret` function so next time we call any of them we actually call secret function and get the `flag`.
 
 We can calculate the offset size needed with the address we want to allocate and the heap address. Once we have that offset we can just pass that offset as `size` in the next insert call and then if we allocate another string using insert, the address we will get is the address we wanted malloc to return and we just simply override that address.
+
+## [Complete exploit](./exploit.py "Exploit")
