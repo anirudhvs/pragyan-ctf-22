@@ -57,17 +57,6 @@ def add(P: Point, Q: Point, X=X):
     return R
 
 
-def multiply(P: Point, n: int):
-    Q = P
-    R = Zero
-    while n != 0:
-        if n % 2 == 1:
-            R = add(R, Q)
-        Q = add(Q, Q)
-        n = n//2
-    return R
-
-
 def order(P: Point):
     n = 2
     R = add(P, P)
@@ -75,6 +64,18 @@ def order(P: Point):
         n += 1
         R = add(R, P)
     return n
+
+
+def multiply(P: Point, n: int):
+    Q = P
+    R = Zero
+    n = n % order(P)
+    while n != 0:
+        if n % 2 == 1:
+            R = add(R, Q)
+        Q = add(Q, Q)
+        n = n//2
+    return R
 
 
 def log(P: Point, Q: Point):
@@ -99,7 +100,10 @@ if __name__ == "__main__":
     print(f"Order of point G is: {order(G)}")
     G1 = multiply(G, randint(1, order(G)-1))
     r = randint(1, order(G)-1)
-    for i in range(2):
-        s = int(input("Enter:"))
+    while True:
+        try:
+            s = int(input("Enter:"))
+        except:
+            s = 0
         C = encrypt(flag, G, G1, r, s)
         print(f"You received {C}")

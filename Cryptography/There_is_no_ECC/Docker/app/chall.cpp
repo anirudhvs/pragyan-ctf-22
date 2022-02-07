@@ -1,6 +1,7 @@
 #include <iostream>
 #include <gmp.h>
 #include <random>
+#include <algorithm>
 #include <fstream>
 using namespace std;
 class Challenge
@@ -28,6 +29,8 @@ Challenge::Challenge(string flag)
     gen_rand_prime(this->ord, 512);
     gen_rand_range(this->r, this->ord);
     gen_rand_range(this->X, this->ord);
+    mpz_mul(this->X, this->X, this->X);
+    mpz_mod(this->X, this->X, this->ord);
     const uint32_t BUFFER_SIZE = this->flag.length();
     uint8_t buf[BUFFER_SIZE];
 
@@ -43,7 +46,7 @@ Challenge::~Challenge()
     mpz_clears(pt, s, ord, X, r, NULL);
 }
 
-void Challenge::gen_rand_prime(mpz_t &prime, const uint32_t nbits) //getPrime(nbits)
+void Challenge::gen_rand_prime(mpz_t &prime, const uint32_t nbits) // getPrime(nbits)
 {
     const uint8_t rem = nbits % 8;
     const uint32_t BUFFER_SIZE = (nbits >> 3) + bool(rem);
@@ -74,7 +77,7 @@ void Challenge::gen_rand_prime(mpz_t &prime, const uint32_t nbits) //getPrime(nb
     } while (mpz_sizeinbase(prime, 2) != nbits);
 }
 
-void Challenge::gen_rand_range(mpz_t &random, const mpz_t &src) //randint(1,random-1)
+void Challenge::gen_rand_range(mpz_t &random, const mpz_t &src) // randint(1,random-1)
 {
     std::random_device rand;
     gmp_randstate_t state;
@@ -87,30 +90,42 @@ void Challenge::gen_rand_range(mpz_t &random, const mpz_t &src) //randint(1,rand
 
 void Challenge::run()
 {
-    int thing, i = 0;
-    mpz_t temp1, temp2;
+    string x;
+    int y;
+    mpz_t temp1, temp2, s1;
     mpz_init(temp1);
     mpz_init(temp2);
+    mpz_init(s1);
     string store;
     store = mpz_get_str(NULL, 10, ord);
     cout << "Order of point G is: " << store << "\n";
-    for (i; i < 2; i++)
+    while (true)
     {
+
         cout << "Enter:";
-        cin >> thing;
-        mpz_set_ui(s, thing);
+        getline(cin, x);
+        y = mpz_set_str(s, x.c_str(), 10);
+        mpz_set(s1, s);
+        mpz_mod(s, s, ord);
+        if (mpz_cmp_ui(s, 0) == 0 || y == -1)
+        {
+            cout << "You received " << 0 << "\n";
+            continue;
+        }
         mpz_mul(temp1, r, s);
         mpz_mul(temp1, temp1, X);
         mpz_mod(temp1, temp1, ord);
-        mpz_powm(temp1, temp1, s, ord);
+        mpz_powm(temp1, temp1, s1, ord);
         mpz_mul(temp2, pt, s);
         mpz_mod(temp2, temp2, ord);
         mpz_mul(temp2, temp2, temp1);
+        mpz_mod(temp2, temp2, ord);
         store = mpz_get_str(NULL, 10, temp2);
         cout << "You received " << store << "\n";
     }
     mpz_clear(temp1);
     mpz_clear(temp2);
+    mpz_clear(s1);
 }
 
 int main()
