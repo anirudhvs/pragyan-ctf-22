@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  crypto6:
+    build:
+      context: ./Docker
+    image: pctf22_crypto6:latest
+    restart: always
+    privileged: true
+    entrypoint: /bin/bash
+    command: /home/ctf/startup.sh
+    ports:
+      - "4613:3000"
+
+networks:
+  default:
+    name: pctf22_crypto
+    driver: bridge
