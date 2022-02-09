@@ -1,0 +1,7 @@
+version: '3'
+services:
+  poly-flow: 
+    build: .
+    ports:
+      - "1337:1337" 
+    privileged: true
