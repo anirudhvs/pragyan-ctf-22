@@ -1,6 +1,5 @@
-The main idea is that the inverse of f(x)=x^a is f(x) itself.</br>
-That is x^a^a=x</br>
-Hence we count the number of occurences of k0,k1,k2,k3 mod 2 in each byte of the ciphertext and observe a pattern to get the flag
+![Alt text](./sol.png)
+
 ```python
 from Crypto.Util.number import *
 def print_scheme():

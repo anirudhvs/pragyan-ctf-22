@@ -1,10 +1,4 @@
-Note that Result is a perfect number. It has to be even since Result << 10**1500
-This implies that Result=m*(m-1)//2 where m is a Mersenne prime(Euclid-Euler Theorem)
-Therefore, Xemu's prime number is a Mersenne Prime.
-
-Note that Alice.bit_length()= 1214 and p.bit_length() <= 1024 and (Xemu **2).bit_length() <= 2048.
-Since sum of 2 n-bit numbers can be atmost of (n+1) bits. This implies Xemu ** 2 has 1213 or 1214 bits and hence Xemu has 606 or 607 bits.
-From the known list of mersenne primes,we can conclude that Xemu=2**607-1 and substituting this back into the cryptosystem gives us our flag 
+![Alt text](./sol.png)
 
 ```python3
 from Crypto.Util.number import long_to_bytes
