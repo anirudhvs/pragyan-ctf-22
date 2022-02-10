@@ -1,4 +1,4 @@
-FROM nsjail2
+FROM nsjail
 
 COPY ./vuln /home/ctf/chal/
 COPY ./libvuln.so /home/ctf/chal
