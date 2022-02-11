@@ -75,7 +75,7 @@ def login():
                 if check_password_hash(login_user['password'], request.form['password']):
                     response = make_response(redirect('/home'))
                     response.set_cookie('auth', encodeJWT(
-                        username), httponly = False)
+                        username), httponly = True)
                     return response
 
             return render_template('login.html', data="Invalid Credentials")
@@ -131,7 +131,7 @@ def register():
                     })
                 response = make_response(redirect('/home'))
                 response.set_cookie('auth', encodeJWT(
-                    username), httponly = False)
+                    username), httponly = True)
                 return response
             else:
                 return render_template('login.html', data="Username already exist.")

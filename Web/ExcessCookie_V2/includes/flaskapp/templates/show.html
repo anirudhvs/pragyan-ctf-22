@@ -1,0 +1,64 @@
+{% include "header.html" %}
+
+{% if data == None %}
+    <h2>No user found.</h2>
+
+{% else %}
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-3">
+        <div class="text-center">
+            <img src="{{ url_for('uploads', filename = data['profilePic']) }}" alt="Profile" class="avatar profilePic" />
+        </div>
+    </div>
+    <!-- right column -->
+    <div class="col-md-9 personal-info" style="padding-top: 10px;">
+        <div class="form-group">
+            <label class="col-lg-3 control-label">UUID:</label>
+            <div class="col-lg-8">
+                <h5>{{data['_id']}}</h5>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">FullName:</label>
+            <div class="col-lg-8">
+                <h5>{{data['fullname']}}</h5>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+                <h5>{{data['email']}}</h5>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Gender:</label>
+            <div class="col-lg-8">
+                <h5>{{data['gender']}}</h5>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">About:</label>
+            <div class="col-lg-8">
+                <h5>{{data['about']}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding-left: 50px;">
+    <h2 class="text-primary">Posts:</h2>
+    {% if data['posts']|length < 1 %} <h4>No posts yet..!!!</h4>
+    {% else %}
+        {% for post in data['posts'] %}
+            <h3 style="font-weight: inherit;">
+                {{post[0]}}:
+            </h3>
+            <h4 style="padding-left: 40px;">
+                {{post[1]}}
+            </h4>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endif%}
+
+{% include "footer.html" %}

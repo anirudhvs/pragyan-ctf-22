@@ -1,6 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from decouple import config
@@ -44,6 +45,8 @@ while True:
             browser.add_cookie(cookie_dict)
             user_id = user.get('reported')
             browser.get(DOMAIN_URL+'/user/'+str(user_id))
+            image = browser.find_element(By.TAG_NAME, 'img').get_attribute("src")
+            browser.get(str(image))
             sleep(TIMEOUT_FOR_USER)
             # print(traceback.format_exc())
             browser.quit()

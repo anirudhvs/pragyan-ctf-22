@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Hackers Post</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/profile.css') }}" />
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <p class="navbar-brand">Hackers Blog</p>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="home"><a href="/home">HOME</a></li>
+        <li id="search"><a href="/search">SEARCH</a></li>
+        <li id="compose"><a href="/compose">COMPOSE BLOG</a></li>
+        <li id="report"><a href="/report">REPORT USER</a></li>
+        <li id="profile"><a href="/profile">PROFILE</a></li>
+        <li id="logout"><a href="/logout">LOG OUT</a></li>
+      </ul>
+    </div>
+  </nav>
+</head>
+
+<body>
+  <div class="container">

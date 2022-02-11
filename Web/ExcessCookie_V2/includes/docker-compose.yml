@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  excessmongov2:
+    container_name: excessmongov2
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./mongodata:/data/db
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+
+  excesscookiev2:
+    container_name: excesscookiev2
+    build: ./flaskapp
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./flaskapp:/excessCookieV2
+    ports:
+      - "5000:5000"
+    depends_on:
+      - excessmongov2
+  excessbotv2:
+    container_name: excessbotv2
+    build: ./xssbot
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - excessmongov2
+      - excesscookiev2

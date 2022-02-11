@@ -1,0 +1,12 @@
+{% include "header.html" %}
+<h1>Compose</h1>
+<form class="" action="/search" method="post">
+    <div class="form-group">
+        <label>Find User:</label>
+        <input class="form-control" type="text" name="searchUUID" placeholder="UUID of user" required/>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        Search
+    </button>
+</form>
+{% include "footer.html" %}
