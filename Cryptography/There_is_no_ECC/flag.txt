@@ -1,1 +1,1 @@
-flag = "p_ctf{y0u_cr4ck3d_th3_c0d3}"
+p_ctf{y0u_kn0w_th3_the0ry_of_gr0ups}
