@@ -2,7 +2,6 @@ Flask
 Flask-PyMongo
 Werkzeug
 python-decouple
-waitress
 gunicorn
 bcrypt
 pyjwt
