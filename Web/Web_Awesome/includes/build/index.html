@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <link href="index.css" rel="stylesheet" />
+    <title>Web Awesome</title>
+    <script async src="index.js"></script>
+  </head>
+  <script>
+    function validate_flag() {
+      var e = document.getElementById("input").value;
+      1 == Module.ccall("right_or_wrong", "number", ["string"], [e])
+        ? alert("Success")
+        : alert("Try Again.");
+    }
+  </script>
+  <body>
+    <div class="Wrapper">
+      <h1 class="Title">Enter the FLAG</h1>
+      <div class="Input">
+        <input
+          id="input"
+          class="Input-text"
+          placeholder="Enter the correct flag, e.g. p_ctf{dummyflag}"
+        />
+        <div class="submit-div">
+          <input
+            id="submitButton"
+            onclick="validate_flag()"
+            type="submit"
+            value="Submit"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

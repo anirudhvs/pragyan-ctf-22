@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet"
+    />
+    <title>Keyboard</title>
+    <script async src="index.js"></script>
+    <style media="screen">
+      body {
+        background-color: #f0f0f0;
+        text-align: center;
+        font-family: Ubuntu, sans-serif;
+      }
+      #keyboard {
+        display: inline-block;
+        padding: 10px 15px;
+        border: 1px solid #009;
+        border-radius: 10px;
+        background-color: #87cdf9;
+        text-align: center;
+        box-shadow: 4px 4px 4px #999;
+      }
+      #main-div {
+        padding-top: 100px;
+      }
+      #keyboard div {
+        margin: 5px 0;
+      }
+      #space {
+        width: 184px;
+      }
+      #keyboard label {
+        margin-top: 20px;
+        font-family: serif;
+        text-decoration: underline;
+      }
+      #keyboard input {
+        box-shadow: 2px 2px 2px #666;
+      }
+      #keyboard input[type="text"] {
+        margin-top: 20px;
+        border: 1px solid #666;
+        border-radius: 4px;
+        box-shadow: none;
+      }
+    </style>
+    <script>
+      !(function () {
+        "use strict";
+        var e, t;
+        function n() {
+          for (
+            e = document
+              .getElementById("keyboard")
+              .getElementsByTagName("input"),
+              t = 0;
+            t < e.length;
+            t++
+          )
+            "button" === e[t].type && e[t].addEventListener("onclick", o(t));
+          (document.getElementById("clear").onclick = function () {
+            document.getElementById("text").value = "";
+          }),
+            (document.getElementById("enter").onclick = function () {
+              var e = document.getElementById("text").value;
+              (e.length <= 9)
+                ? 1 == Module.ccall("start", "number", ["string"], [e])
+                  : alert("Try Again. I'm not impressed by this.")
+              document.getElementById("text").value = "";
+            });
+        }
+        function o(t) {
+          e[t].onclick = function () {
+            document.getElementById("text").value += this.value.toLowerCase();
+          };
+        }
+        window.addEventListener
+          ? window.addEventListener("load", n, !1)
+          : window.attachEvent("onload", n);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="main-div">
+      <h1>Text Me !!!</h1>
+      <div id="keyboard">
+        <div><input id="text" readonly /></div>
+        <div>
+          <input type="button" value="0" /> <input type="button" value="1" />
+          <input type="button" value="2" /> <input type="button" value="3" />
+          <input type="button" value="4" /> <input type="button" value="5" />
+          <input type="button" value="6" /> <input type="button" value="7" />
+          <input type="button" value="8" /> <input type="button" value="9" />
+        </div>
+        <div>
+          <input type="button" value="Q" /> <input type="button" value="W" />
+          <input type="button" value="E" /> <input type="button" value="R" />
+          <input type="button" value="T" /> <input type="button" value="Y" />
+          <input type="button" value="U" /> <input type="button" value="I" />
+          <input type="button" value="O" /> <input type="button" value="P" />
+        </div>
+        <div>
+          <input type="button" value="A" /> <input type="button" value="S" />
+          <input type="button" value="D" /> <input type="button" value="F" />
+          <input type="button" value="G" /> <input type="button" value="H" />
+          <input type="button" value="J" /> <input type="button" value="K" />
+          <input type="button" value="L" />
+        </div>
+        <div>
+          <input type="button" value="Z" /> <input type="button" value="X" />
+          <input type="button" value="C" /> <input type="button" value="V" />
+          <input type="button" value="B" /> <input type="button" value="N" />
+          <input type="button" value="M" />
+        </div>
+        <div>
+          <input type="button" value=" " id="space" />
+          <input type="reset" value="clear" id="clear" />
+          <input type="button" value="Enter" id="enter" />
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

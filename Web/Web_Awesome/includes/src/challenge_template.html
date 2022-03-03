@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
+    <title>Web Awesome</title>
+    {{{ SCRIPT }}}
+  </head>
+  <script>
+    function validate_flag () {
+      var flag = document.getElementById("input").value;
+      console.log(flag);
+      var result = Module.ccall("right_or_wrong", "number", ["string"], [flag]);
+      if (result == 1) {
+        alert("Success");
+      } else {
+        alert("Try Again.");
+      }
+    };
+  </script>
+  <body>
+    <div class="Wrapper">
+      <h1 class="Title">Enter the FLAG</h1>
+      <div class="Input">
+        <input type="text" id="input" class="Input-text" placeholder="Enter the correct flag, e.g. p_ctf{dummyflag}">
+        <div class="submit-div">
+          <input id="submitButton" type="submit" value="Submit" onclick="validate_flag()" />
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+    container_name: feb14special
+    restart: always
+    ports:
+      - "4001:80"
