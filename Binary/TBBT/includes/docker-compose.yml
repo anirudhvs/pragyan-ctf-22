@@ -1,0 +1,7 @@
+version: '3'
+services:
+  tbbt: 
+    build: .
+    ports:
+      - "5681:1337" # local:container
+    privileged: true
