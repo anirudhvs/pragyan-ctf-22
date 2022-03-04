@@ -37,5 +37,5 @@ COPY nsjail-pwn.sh /home/ctf/
 RUN chmod +x /home/ctf/nsjail-pwn.sh
 
 # run default script
-ENTRYPOINT ["/home/ctf/nsjail-pwn.sh"]
+ENTRYPOINT ["/bin/bash","/home/ctf/nsjail-pwn.sh"]
 #ENTRYPOINT ["/bin/bash"]
