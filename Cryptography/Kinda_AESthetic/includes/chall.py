@@ -1,9 +1,12 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import os, sys
+import string
+import random
 
 KEY = os.urandom(16)
 IV = os.urandom(16)
+flag = REDACTED
 
 def encrypt(msg):
     msg = pad(msg, 16)
@@ -24,15 +27,19 @@ def parse(inp):
     msg = decrypt(msg,iv)
     return msg
 
+chars = string.printable[:-5]
+x = random.randint(5, 15)
+passwd = ''.join(random.choice(chars) for _ in range(x))
+
 secrets = {
     'abrac': 'iloveyou',
     'sudo': REDACTED, # ;)
-    'gg': REDACTED,
+    'gg': passwd,
     'yeager': 'ironman'
 }
 
-flag = REDACTED
-token = REDACTED
+x = random.randint(5, 13)
+token = ''.join(random.choice(chars) for _ in range(x))
 
 def lookup(inp):
     try:
@@ -71,4 +78,3 @@ while True:
     except:
         print('')
         sys.exit(0)
-
